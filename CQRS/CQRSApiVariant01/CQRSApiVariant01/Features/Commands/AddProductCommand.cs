@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using CQRSApiVariant01.Infrastructure.Repositories;
@@ -10,6 +11,7 @@ namespace CQRSApiVariant01.Features.Commands
 {
     public class AddProductCommand : IRequest<Product>
     {
+        //[Required] //DataAnnotation instead of FluentValidator can be used here
         public string Alias { get; set; }
 
         public string Name { get; set; }
@@ -38,6 +40,7 @@ namespace CQRSApiVariant01.Features.Commands
             {
                 RuleFor(c => c.Name).NotEmpty();
                 RuleFor(c => c.Alias).NotEmpty();
+                RuleFor(c => c.Type).IsInEnum();
             }
         }
     }
