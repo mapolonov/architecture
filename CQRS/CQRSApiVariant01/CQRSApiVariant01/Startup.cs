@@ -41,9 +41,8 @@ namespace CQRSApiVariant01
             services.AddTransient<IProductsRepository, ProductsRepository>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); // Not necessary to declare
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
