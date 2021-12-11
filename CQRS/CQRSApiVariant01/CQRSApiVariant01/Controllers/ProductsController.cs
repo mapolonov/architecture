@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using CQRSApiVariant01.Features.Commands;
@@ -25,7 +25,7 @@ namespace CQRSApiVariant01.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)] // !!!! for swagger documentation
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Post([FromBody] AddProductCommand client, ApiVersion apiVersion,
             CancellationToken token)
@@ -35,9 +35,9 @@ namespace CQRSApiVariant01.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(DataWithTotal<Product>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(DataWithTotal<Product>), StatusCodes.Status200OK)] // !!!! for swagger documentation
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)] // !!!! for swagger documentation
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // !!!! for swagger documentation
         [ProducesDefaultResponseType]
         public async Task<ActionResult<DataWithTotal<Product>>> Get([FromQuery] GetProductsQuery request,
             CancellationToken token) =>
