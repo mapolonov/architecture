@@ -62,3 +62,8 @@ class Service : IService, IAsyncInitialization
 }
 var service - new Service(asyncDependency);
 await service.Initialization;
+
+//!!! IoC init problem
+var service = scope.Resolve<IService>();
+if (service is IAsyncInitialization asyncService)
+	await asyncService.Initialization;
