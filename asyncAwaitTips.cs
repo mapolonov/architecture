@@ -24,3 +24,5 @@ class Service : IService
 		return new Service(data);
 	}
 }
+
+var service = await Service.CreateAsync(asyncDependency);
