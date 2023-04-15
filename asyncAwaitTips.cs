@@ -42,3 +42,23 @@ class Service : IService
 }
 
 var service = await Service.CreateAsync(asyncDependency);
+
+OR (by Stephen Cleary)
+public interface IAsyncInitialization
+{
+	Task Initialization { get; }
+}
+class Service : IService, IAsyncInitialization
+{
+	public SomeData Data { get; private set; }
+	public Task Initialization { get; }
+	private Service(IAsyncdependency asyncDependency) 
+	{
+		Initialization = InitializeAsync(asyncDependency);
+	}
+	
+	private async Task InitializeAsync(IAsyncdependency asyncDependency) => 
+		_ data = await asyncDependency.DoAsync();
+}
+var service - new Service(asyncDependency);
+await service.Initialization;
