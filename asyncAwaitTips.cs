@@ -24,7 +24,7 @@ class Service : IService
 OR
 class Service : IService
 {
-	private readonly SomeData _data;
+	private SomeData _data; // is not readonly anymore here
 	public SomeData Data => _data;
 	private Service() {}
 	
