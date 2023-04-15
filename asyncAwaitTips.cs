@@ -67,3 +67,17 @@ await service.Initialization;
 var service = scope.Resolve<IService>();
 if (service is IAsyncInitialization asyncService)
 	await asyncService.Initialization;
+
+OR AsyncLazy pattern
+class Service
+{
+	private IAsyncdependency _asyncDependency;
+	public AsyncLazy<SomeData> _data => new AsyncLazy<SomeData>(async () => await asyncDependency.DoAsync());
+	private Service(IAsyncdependency asyncDependency) => _asyncDependency = asyncDependency;
+	
+	public async Task DoAsync()
+	{ 
+		var data = await _data;
+		//other logic
+	}
+}
