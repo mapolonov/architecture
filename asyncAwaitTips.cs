@@ -13,15 +13,31 @@ class Service : IService
 {
 	private readonly SomeData _data;
 	public SomeData Data => _data;
-	private Service(SomeData data)
-	{
-		_data = data;
-	}
+	private Service(SomeData data) => _data = data;
 	
 	public static async Task<Service> CreateAsync(IAsyncdependency asyncDependency)
 	{
 		var data = await asyncDependency.DoAsync();
 		return new Service(data);
+	}
+}
+OR
+class Service : IService
+{
+	private readonly SomeData _data;
+	public SomeData Data => _data;
+	private Service() {}
+	
+	private async Task<Service> InitAsync(IAsyncdependency asyncDependency)
+	{
+		_ data = await asyncDependency.DoAsync();
+		return this;
+	}
+	
+	public static Task<Service> CreateAsync(IAsyncdependency asyncDependency)
+	{
+		var service = new Service();
+		return service.InitAsync(asyncDependency);
 	}
 }
 
